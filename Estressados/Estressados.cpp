@@ -333,7 +333,276 @@ vector<int> abandonados(const vector<int>& vetor){
    return restantes;
 }
 
+std::vector<int> ordenar(const std::vector<int>& vet){
+    std::vector<int> vetornovo = vet;
+    int aux;
+    int troca = 1;
+    while (troca == 1){
+        troca = 0;        
+        for (int i = 0; i < vetornovo.size(); i++){
+            if (vetornovo[i] > vetornovo[i + 1]){
+                troca = 1;
+                aux = vetornovo[i];
+                vetornovo[i] = vetornovo[i + 1];
+                vetornovo[i + 1] = aux;
+            }
+        }
+    }
+    return vetornovo;
+}
 
+//APLICAÇÂO DO ESTRESSADOS 3
+
+
+void print(std::vector<int> vet){
+    for (int i : vet) std::cout << i << ' ';
+}
+
+std::vector<int> sozinhos(const std::vector<int>& vet){
+    std::vector<int> vetornovo = vet;
+    
+    for (int i = 0; i < vetornovo.size(); i++){
+        if(vetornovo[i]<0)vetornovo[i]=vetornovo[i]*-1;
+    }
+    std::vector<int> vetoraux = vetornovo;
+
+    for (int i = 0; i < vetornovo.size(); i++){
+        vetoraux[i]=0;
+        for (int j = 0; j < vetoraux.size(); j++){
+            if(vetornovo[i]==vetornovo[j]){
+                vetoraux[i]++;
+            }
+        }
+    }
+    std::vector<int> vetorfinal;
+    
+    for (int i = 0; i < vetoraux.size(); i++){
+            if(vetoraux[i]==1) vetorfinal.push_back(vetornovo[i]);
+    }
+
+return vetorfinal;   
+}
+
+void ocorrencias(const std::vector<int>& vet){
+    std::vector<int> vetornovo = vet;
+    
+    for (int i = 0; i < vetornovo.size(); i++){
+        if(vetornovo[i]<0)vetornovo[i]=vetornovo[i]*-1;
+    }
+    std::vector<int> vetoraux = vetornovo;
+
+    for (int i = 0; i < vetornovo.size(); i++){
+        vetoraux[i]=0;
+        for (int j = 0; j < vetoraux.size(); j++){
+            if(vetornovo[i]==vetornovo[j]){
+                vetoraux[i]++;
+            }
+        }
+    }
+    std::vector<int> vetorfinal;
+    int maior = 0;
+    int maiorposicao = 0;
+    for (int i = 0; i < vetoraux.size(); i++){
+        if(maior<vetoraux[i]){
+            maior=vetoraux[i];
+            maiorposicao = i;
+        } 
+    }
+    
+    std::cout<<vetornovo[maiorposicao];
+
+    
+}
+
+std::vector<int> recorrentes(const std::vector<int>& vet){
+    std::vector<int> vetornovo = vet;
+    
+    for (int i = 0; i < vetornovo.size(); i++){
+        if(vetornovo[i]<0)vetornovo[i]=vetornovo[i]*-1;
+    }
+    std::vector<int> aux = ordenar(vetornovo);
+    std::vector<int> vetornovoo = ordenar(vetornovo);
+
+    for (int i = 0; i < vetornovoo.size(); i++){
+        aux[i]=0;
+        for (int j = 0; j < aux.size(); j++){
+            if(vetornovoo[i]==vetornovoo[j]){
+                aux[i]++;
+            }
+        }
+    }
+    std::vector<int> vetorfinal;
+    
+    for (int i = 0; i < aux.size(); i++){
+            if(aux[i]>1 && vetornovoo[i] != vetornovoo[i+1]) vetorfinal.push_back(vetornovoo[i]);
+    }
+
+return vetorfinal; 
+}
+
+void briga(const std::vector<int>& vet){
+    std::vector<int> vetornovo = vet;
+    int total=0;
+    for (int i = 1; i < vetornovo.size(); i++){
+        if(vetornovo[i]>49&&vetornovo[i-1]>29&&vetornovo[i+1]>29) total++;
+    }
+    std::cout<<"Essa situação ocorreu "<<total<<" vezes";    
+
+}
+
+std::vector<int> apaziguado(const std::vector<int>& vet){
+    std::vector<int> thisvet= vet;
+    std::vector<int> vetornovo{};
+
+    for (int i = 0; i < thisvet.size(); i++){
+        if(thisvet[i]<0) thisvet[i] =thisvet[i] * -1;
+    }
+    
+    for (int i =0; i < thisvet.size(); i++){
+        if( thisvet[i]>80 &&(thisvet[i-1]<10 || thisvet[i+1]<10))vetornovo.push_back(i);
+    }
+    return vetornovo;
+}
+
+void quantostimes(const std::vector<int>& vet){
+    std::vector<int> thisvet= vet;
+    int qntd=0;
+    for (int i = 0; i < thisvet.size(); i++)if((thisvet[i]<0 && thisvet[i+1]>0) || (thisvet[i]>0 && thisvet[i+1]<0))qntd++;
+    std::cout<<qntd;
+
+}
+
+void timep(const std::vector<int>& vet){
+    std::vector<int> thisvet= vet;
+    int quantidade=0;
+    int contador = 0;
+    int contadormaior = 0;
+    int posicao = 0;
+    int posicaofinal = 0;
+    for (int i = 0; i < thisvet.size(); i++){
+        if((thisvet[i]<0 && thisvet[i+1]>0) || (thisvet[i]>0 && thisvet[i+1]<0)){
+            quantidade++;
+            contador = 0;
+        }else{
+            contador++;
+            posicao = i;
+        }
+
+        if(contadormaior<contador){
+            contadormaior = contador;
+            posicaofinal = posicao;
+        }
+
+    }
+        posicaofinal++;
+        contadormaior++;
+        int posfim = posicaofinal - contadormaior+1;
+    for (int i = posicaofinal; i >=posfim; i--){
+        std::cout<<thisvet[i]<<" ";
+    }
+    
+
+}
+
+void sozinhost(const std::vector<int>& vet){
+    std::vector<int> vetornovo = vet;
+    int cont=0;
+    for (int i = 1; i < vetornovo.size(); i++){
+        if((vetornovo[i]>0 && vetornovo[i-1]<0 && vetornovo[i+1]<0) || (vetornovo[i]<0 && vetornovo[i-1]>0 && vetornovo[i+1]>0) )cont++;
+	}
+    std::cout<<"Há "<<cont<<" pessoas sozinhas.";
+}
+
+std::vector<int> casais(const std::vector<int>& vet){
+    std::vector<int> vetornovo = vet;
+    std::vector<int> casais;
+    int aux = 0;
+    for (int i = 0; i < vetornovo.size(); i++){
+        aux = vetornovo[i] *-1;
+        for (int j = 0; j < vetornovo.size(); j++){
+            if(vetornovo[j] == aux) casais.push_back(vetornovo[i]);
+        }
+    }
+    
+    return casais;
+}
+
+std::vector<int> trios(const std::vector<int>& vet){
+    std::vector<int> vetornovo = vet;
+    std::vector<int> trios;
+
+    for (int i = 0; i <vetornovo.size(); i++){
+        if(vetornovo[i]<0) vetornovo[i] = vetornovo[i] * -1; 
+    }
+
+    int aux=0;
+    for (int i = 0; i < vetornovo.size(); i++){
+        aux = vetornovo[i];
+        int qntd = 0;
+        for (int j = 0; j < vetornovo.size(); j++){
+            if(vetornovo[j] == aux) qntd++; 
+        }
+        if(qntd>=3) trios.push_back(vetornovo[i]);
+    }
+    
+    return trios;
+}
+
+std::vector<int> remove(const std::vector<int>& vet){
+    std::vector<int> vetornovo = vet;
+    int aremover=0;
+    std::cin >> aremover;
+
+    for (int i = 0; i < vetornovo.size(); i++){
+        if(vetornovo[i]==aremover) vetornovo.erase(vetornovo.begin()+i);
+    }
+ return vetornovo;       
+}
+
+std::vector<int> remove2(const std::vector<int>& vet, int aremover){
+    std::vector<int> vetornovo = vet;
+    for (int i = 0; i < vetornovo.size(); i++){
+        if(vetornovo[i]==aremover) vetornovo.erase(vetornovo.begin()+i);
+    }
+ return vetornovo;       
+}
+
+std::vector<int> insert(const std::vector<int>& vet){
+    std::vector<int> vetornovo = vet;
+    int valor=0;
+    int posicao=0;
+    std::cout<<"Insira valor e posição";
+    std::cin >> valor;
+    std::cin >> posicao;
+
+  std::vector<int>::iterator it;
+
+  it = vetornovo.begin()+posicao;
+  it = vetornovo.insert (it, valor);
+
+return vetornovo;
+}
+
+std::vector<int> dance(const std::vector<int>& vet){
+    std::vector<int> vetornovo = vet;
+    int bol = 1;
+    for (int i = 0; i < vetornovo.size(); i++){
+        if(vetornovo[i]<0)vetornovo[i] = vetornovo[i]* -1;    
+    }
+    while(bol == 1){
+        bol = 0;
+        for (int i = 0; i < vetornovo.size(); i++){
+            if(vetornovo[i] ==vetornovo[i+1]){
+                vetornovo = remove2(vetornovo,vetornovo[i]);
+                vetornovo = remove2(vetornovo,vetornovo[i+1]);
+                bol = 1;
+            }
+        }
+    }
+    return vetornovo;
+}
+
+// ainda n chamei algumas funções 
 int main(){
     
    //Busca
