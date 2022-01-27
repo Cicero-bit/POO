@@ -35,7 +35,7 @@ struct Motoca{
     }
 
     std::string buzinar(){
-        return "P" + std::string(this->potencia, "e") + "m";
+        std::cout << "Pem";
     }
 
     Pessoa * removerpessoa(){
@@ -49,12 +49,13 @@ struct Motoca{
     }
 
     bool dirigir(int tempo){
+        this->tempo = tempo;
         if(this->pessoa == nullptr){
             std::cout << "Não tem pessoa para dirigir" << std::endl;
             return false;
         }
         if(tempo <= this-> tempo){
-            std::cout << "Dirigindo";
+            std::cout << "Dirigindo\n";
         }else{
             std::cout << "Compre tempo";
         }
@@ -109,17 +110,19 @@ int main(){
         }
         else if(cmd == "comprar"){
             ss >> tempo;
+            motoca1.tempo = tempo;
         }
         else if(cmd == "dirigir"){
             motoca1.dirigir(tempo);
+            tempo--;
         }
-        else if(cmd == "honk") {
+        else if(cmd == "buzinar") {
             motoca1.buzinar();
         }
         else if(cmd == "end"){
             break;
         }else{
-            std::cout << "Comando inesistente";
+            std::cout << "Comando inesistente\n";
         }
     }
     return 0;
