@@ -18,14 +18,17 @@ struct Grafite{
         return os;
     }
 
-    int desgasteFolha(){
+    int Desgaste(){
         if (this->dureza == "HB"){
             return 1;
-        }else if (this->dureza == "2B"){
+        }
+        else if (this->dureza == "2B"){
             return 2;
-        }else if (this->dureza == "4B"){
+        }
+        else if (this->dureza == "4B"){
             return 4;
-        }else if (this->dureza == "6B"){
+        }
+        else if (this->dureza == "6B"){
             return 6;
         }
     }
@@ -51,13 +54,13 @@ struct Lapiseira{
         return os;
     }
 
-    bool inserirGrafite(Grafite &grafite){
+    bool Inserir(Grafite &grafite){
         if (grafite.calibre != this->calibre){
-            std::cout << "Calibre incorreto\n";
+            std::cout << "Sem esse calibre\n";
             return true;
         }
         if ((int)this->grafites.size() == 4){
-            std::cout << "Quantidade maxima de grafites foi atingida\n";
+            std::cout << "Maximo de grafites\n";
             return true;
         }
         this->grafites.push_back(grafite);
@@ -65,9 +68,9 @@ struct Lapiseira{
         return true;
     }
 
-    std::vector<Grafite> removerGrafite(int i){
+    std::vector<Grafite> Remover(int i){
         if (this->grafites.empty()) {
-            std::cout << "Nenhuma grafite foi inserida\n";
+            std::cout << "Nao ha grafites\n";
             
             return this->grafites;
         }
@@ -77,15 +80,15 @@ struct Lapiseira{
         return temp;
     }
 
-    void escreverFolhas(int folhas){
+    void Escrever(int folhas){
         int temp = 0;
 
         if (this->grafites.empty()){
-            std::cout << "A grafite ainda nao foi inserida para poder escrever\n";
+            std::cout << "SEM GRAFITE\n";
         }else{
             for (int i = 0; i < (int)this->grafites.size(); i++){
                 while (this->grafites[i].tamanho > 0 && folhas > 0){
-                    this->grafites[i].tamanho -= this->grafites[i].desgasteFolha();
+                    this->grafites[i].tamanho -= this->grafites[i].Desgaste();
                     if (this->grafites[i].tamanho >= 0){
                         folhas--;
                         temp++;
@@ -96,8 +99,8 @@ struct Lapiseira{
                 }
             }
             if (folhas > 0 && this->grafites.empty()){
-                std::cout << "As grafites acabaram\n";
-                std::cout << "Foram escritas apenas: " << temp << " folhas\n";
+                std::cout << "Acabou o grafite\n";
+                std::cout << "Folhas escritas: " << temp;
             }
         }
     }
@@ -113,39 +116,39 @@ void controle(Lapiseira &lapiseira){      // me recomendaram usar tudo em uma fu
 
         ss >> cmd;
 
-        if (cmd == "start"){
+        if (cmd == "Init"){
             float calibre;
             ss >> calibre;
             lapiseira.calibre = calibre;
         }
-        else if (cmd == "show"){
+        else if (cmd == "Show"){
             std::cout << lapiseira;
         }
-        else if (cmd == "inserir"){
+        else if (cmd == "Insert"){
             float calibre;
             std::string dureza;
             int tamanho;
             ss >> calibre >> dureza >> tamanho;
             Grafite grafite{calibre, dureza, tamanho};
-            lapiseira.inserirGrafite(grafite);
+            lapiseira.Inserir(grafite);
 
         }
-        else if (cmd == "tira"){
+        else if (cmd == "Remove"){
             int i;
             ss >> i;
-            lapiseira.removerGrafite(i);
+            lapiseira.Remover(i);
         }
-        else if (cmd == "escreve"){
+        else if (cmd == "Write"){
             int folhas;
 
             ss >> folhas;
 
-            lapiseira.escreverFolhas(folhas);
+            lapiseira.Escrever(folhas);
         }
-        else if (cmd == "end"){
+        else if (cmd == "End"){
             break;
         }else{
-            std::cout << "Comando não existe" << "\n";
+            std::cout << "Comando inesistente" << "\n";
         }
     }
 }
