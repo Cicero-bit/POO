@@ -5,9 +5,9 @@ struct Pessoa{
     std::string nome;                                               //atributos
     int idade;
 
-    Pessoa(std::string nome = "", int idade = 0){                   //contrutor padrão
-        this->nome = nome;                                          //altera os atributos por causa do ponteiro
-        this->idade = idade;
+    Pessoa(std::string nome = "", int idade = 0){                   //obejto
+        this->nome = nome;                                          //contrutor do objeto
+        this->idade = idade;                                        //altera os atributos por causa do ponteiro
     }
     
     friend std::ostream& operator <<(std::ostream& os, const Pessoa& p){
@@ -28,7 +28,7 @@ struct Motoca{
         this->pessoa = {nullptr};
     }
 
-    friend std::ostream& operator <<(std::ostream& os, const Motoca& m){
+    friend std::ostream& operator <<(std::ostream& os, const Motoca& m){        //metodos
         os << "Tempo: " << m.tempo << "Potencia: " << m.potencia; 
         os << "[" << (m.pessoa == nullptr ? "VAZIA" : m.pessoa->nome) << "]";
         return os;
@@ -40,7 +40,7 @@ struct Motoca{
 
     Pessoa * removerpessoa(){
         Pessoa *p = this->pessoa;
-        this->pessoa =nullptr;
+        this->pessoa =nullptr;  // metodos
         return p;
     }
 
@@ -48,7 +48,7 @@ struct Motoca{
         this->tempo += tempo;
     }
 
-    bool dirigir(int tempo){
+    bool dirigir(int tempo){         //metodos
         this->tempo = tempo;
         if(this->pessoa == nullptr){
             std::cout << "Não tem pessoa para dirigir" << std::endl;
@@ -62,7 +62,7 @@ struct Motoca{
     }
 
     bool inserirpessoa(Pessoa *p){
-    if(this->pessoa != nullptr){
+    if(this->pessoa != nullptr){ //metodos
         std:: cout << "Motoca cheia" << std:: endl;
         return false;
     }
@@ -122,7 +122,7 @@ int main(){
         else if(cmd == "end"){
             break;
         }else{
-            std::cout << "Comando inesistente\n";
+            std::cout << "Comando inexistente\n";
         }
     }
     return 0;

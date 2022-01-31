@@ -10,7 +10,7 @@ class Kid{
     std::string nome;
 
 public:
-    Kid (std::string nome = "", int idade = 0){
+    Kid(std::string nome = "", int idade = 0){
         this->idade = idade;
         this->nome = nome;
     }
@@ -19,11 +19,11 @@ public:
         this->nome = nome;
     }
 
-    void setIdade (int idade){
+    void setIdade(int idade){
         this->idade = idade;
     }
 
-    int getIdade (){
+    int getIdade(){
         return this->idade;
     }
 
@@ -80,9 +80,9 @@ public:
         fila.push_back(kid);
     }
 
-    void in(){
+    void join(){
         if (empty(this->fila)){
-            std::cout << "fail: nao ha ninguem na fila\n";
+            std::cout << "Nao ha ninguem na fila \n";
         }
         else{
             this->dentro.push_back(*(this->fila.begin()));
@@ -92,7 +92,7 @@ public:
 
     void out(){
         if (empty(this->dentro)){
-            std::cout << "fail: nao ha ninguem no pula pula\n";
+            std::cout << "Nao ha ninguem no pula pula \n";
         }
         else{
             this->fila.push_back(*(this->dentro.begin()));
@@ -100,7 +100,7 @@ public:
         }
     }
 
-    std::shared_ptr<Kid> remove (std::string nome){
+    std::shared_ptr<Kid> remove(std::string nome){
         int x = search(nome, this->fila);
         int y = search(nome, this->dentro);
 
@@ -122,12 +122,12 @@ public:
         dentro.clear();
     }
 
-    std::string toString  (){
-        std::string texto {"=> "};
+    std::string toString(){
+        std::string texto {"- "};
        
-       texto += montarString(this->fila);
+        texto += montarString(this->fila);
 
-        texto += "=> [ ";
+        texto += "- [ ";
 
         texto += montarString(this->dentro);
 
@@ -150,7 +150,7 @@ int main(){
 
         std::stringstream ss(linha);
 
-        if (comando == "arrive"){
+        if (comando == "New"){
             
             std::string nome;
             int idade;
@@ -160,28 +160,28 @@ int main(){
 
             pula->arrive(auxiliar);
         }
-        else if (comando == "in"){
-            pula->in();
+        else if (comando == "Join"){
+            pula->join();
         }
-        else if(comando == "out"){
+        else if(comando == "Out"){
             pula->out();
         }
-        else if(comando == "show"){
+        else if(comando == "Show"){
             std::cout << pula->toString();
         } 
-        else if (comando == "remove"){
+        else if (comando == "Remove"){
             std::string nome;
             ss >> nome;
             pula->remove(nome);
         }
-        else if (comando == "clear"){
+        else if (comando == "Clear"){
             pula->clear();
         }
-        else if (comando == "end"){
+        else if (comando == "End"){
             break;
         }
         else 
-            std::cout << "Comando inesistente" << "\n";
+            std::cout << "Comando inexistente" << "\n";
     }
     
     return 0;
