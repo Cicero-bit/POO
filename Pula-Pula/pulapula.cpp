@@ -1,9 +1,8 @@
 #include <iostream>
-#include <vector>
-#include <list>
-#include <memory>
-#include <sstream>
-#include <string>
+#include <list> // lista
+#include <memory> //shared ptr
+#include <sstream> // os
+
 
 class Kid{
     int idade;
@@ -19,16 +18,16 @@ public:
         this->nome = nome;
     }
 
+    std::string getNome(){
+        return this->nome;
+    }
+
     void setIdade(int idade){
         this->idade = idade;
     }
 
     int getIdade(){
         return this->idade;
-    }
-
-    std::string getNome(){
-        return this->nome;
     }
 
     std::string toString(){
@@ -39,13 +38,14 @@ public:
 };
 
 class Trampolim{
-    std::list <std::shared_ptr<Kid>> dentro; //aula 05 pont. inteli
-    std::list <std::shared_ptr<Kid>> fila;
+public:
+    std::list <std::shared_ptr<Kid>> entrada_trampolim; //aula 05 pont. inteli
+    std::list <std::shared_ptr<Kid>> entra_fila;
 
-    static bool empty(std::list<std::shared_ptr<Kid>> fila){
-        if (fila.empty())
-            return true;                //check bool
-        else{
+    static bool empty(std::list<std::shared_ptr<Kid>> entra_fila){
+        if (entra_fila.empty()){
+            return true;            //check bool
+        }else{
             return false;
         }
     }
@@ -61,7 +61,7 @@ class Trampolim{
         return (-1);
     }
 
-    static std::string montarString(std::list<std::shared_ptr<Kid>> vet){
+    static std::string toString(std::list<std::shared_ptr<Kid>> vet){
         std::string texto;
         if (!(empty(vet))){
             for (int it {(int)vet.size() - 1}; it >= 0; it--){
@@ -72,64 +72,63 @@ class Trampolim{
         return texto;
     }
 
-public:
     Trampolim(){
     }
 
     void arrive(std::shared_ptr<Kid> kid){
-        fila.push_back(kid);
+        entra_fila.push_back(kid);
     }
 
     void join(){
-        if (empty(this->fila)){
-            std::cout << "Nao ha ninguem na fila \n";
+        if (empty(this->entra_fila)){
+            std::cout << "Nao ha ninguem na entra_fila \n";
         }
         else{
-            this->dentro.push_back(*(this->fila.begin()));
-            this->fila.pop_front();
+            this->entrada_trampolim.push_back(*(this->entra_fila.begin()));
+            this->entra_fila.pop_front();
         }
     }
 
     void out(){
-        if (empty(this->dentro)){
-            std::cout << "Nao ha ninguem no pula pula \n";
+        if (empty(this->entrada_trampolim)){
+            std::cout << "Nao ha ninguem no tramoplin tramoplin \n";
         }
         else{
-            this->fila.push_back(*(this->dentro.begin()));
-            this->dentro.pop_front();
+            this->entra_fila.push_back(*(this->entrada_trampolim.begin()));
+            this->entrada_trampolim.pop_front();
         }
     }
 
     std::shared_ptr<Kid> remove(std::string nome){
-        int x = search(nome, this->fila);
-        int y = search(nome, this->dentro);
+        int x = search(nome, this->entra_fila);
+        int y = search(nome, this->entrada_trampolim);
 
         if (x != -1){
-            auto aux = std::next(fila.begin(), x);
-            fila.erase(std::next(fila.begin(), x));
+            auto aux = std::next(entra_fila.begin(), x);
+            entra_fila.erase(std::next(entra_fila.begin(), x));
             return (*aux);
         }
         else if (y != -1){
-            auto aux = std::next(dentro.begin(), y);
-            dentro.erase(std::next(dentro.begin(), y));
+            auto aux = std::next(entrada_trampolim.begin(), y);
+            entrada_trampolim.erase(std::next(entrada_trampolim.begin(), y));
             return (*aux);
         }
        return nullptr;
     }
 
     void clear(){
-        fila.clear();
-        dentro.clear();
+        entra_fila.clear();
+        entrada_trampolim.clear();
     }
 
     std::string toString(){
         std::string texto {"- "};
        
-        texto += montarString(this->fila);
+        texto += toString(this->entra_fila);
 
-        texto += "- [ ";
+        texto += "[";
 
-        texto += montarString(this->dentro);
+        texto += toString(this->entrada_trampolim);
 
         texto += "]\n";
 
@@ -139,7 +138,7 @@ public:
 };
 
 int main(){
-    std::shared_ptr<Trampolim> pula (new Trampolim ());
+    std::shared_ptr<Trampolim> tramoplin (new Trampolim ());
 
     while (true){
         std::string comando{""};
@@ -150,34 +149,32 @@ int main(){
 
         std::stringstream ss(linha);
 
-        if (comando == "New"){
-            
+        if (comando == "new"){
             std::string nome;
             int idade;
-            ss >> nome;
-            ss >> idade;
-            std::shared_ptr<Kid> auxiliar ( new Kid(nome, idade));
+            ss >> nome >> idade;
+            std::shared_ptr<Kid> temp ( new Kid(nome, idade));
 
-            pula->arrive(auxiliar);
+            tramoplin->arrive(temp);
         }
-        else if (comando == "Join"){
-            pula->join();
+        else if (comando == "join"){
+            tramoplin->join();
         }
-        else if(comando == "Out"){
-            pula->out();
+        else if(comando == "out"){
+            tramoplin->out();
         }
-        else if(comando == "Show"){
-            std::cout << pula->toString();
+        else if(comando == "show"){
+            std::cout << tramoplin->toString();
         } 
-        else if (comando == "Remove"){
+        else if (comando == "remove"){
             std::string nome;
             ss >> nome;
-            pula->remove(nome);
+            tramoplin->remove(nome);
         }
-        else if (comando == "Clear"){
-            pula->clear();
+        else if (comando == "clear"){
+            tramoplin->clear();
         }
-        else if (comando == "End"){
+        else if (comando == "end"){
             break;
         }
         else 
