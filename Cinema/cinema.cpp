@@ -62,7 +62,7 @@ public:
             std::cout << "Cadeira ocupada" << std::endl;
             return ;
         }
-        if(this->procurarPessoa(pessoa->nome) != -1){
+        if (this->procurarPessoa(pessoa->nome) != -1){
             std::cout << "Pessoa ja esta no cinema" << std::endl;
             return ;
         }

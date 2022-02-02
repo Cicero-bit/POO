@@ -171,7 +171,7 @@ vector<int> clonar(const vector<int>& vetor){
 
    for (int i = 0; i < (int)vetor.size(); i++){
       copia.push_back(vetor[i]); 
-}
+   }
    return copia;
 }
 
@@ -238,7 +238,6 @@ int sortear(const vector<int>& vetor){
 
 void embaralhar(vector<int>& vetor){
    srand(time(NULL));
-
    int aux;
 
    for (int i = 0; i < vetor.size(); i++){
@@ -255,10 +254,9 @@ void ordenar(vector<int>& vetor){
    for (int i = 0; i < vetor.size(); i++){
       for (int j = i + 1; j < vetor.size(); j++){
          aux = vetor[i];
-            
          if(vetor[i] > vetor[j]){
-         vetor[j] = vetor[i];
-         vetor[j] = aux;
+            vetor[j] = vetor[i];
+            vetor[j] = aux;
          }
       }
    }   
@@ -339,272 +337,9 @@ vector<int> ordenar(const vector<int>& vet){
     return vetornovo;
 }
 
-//APLICAÇÂO DO ESTRESSADOS 3
-
-
-void print(vector<int> vet){
-   for (int i : vet){
-      cout << i << ' ';
-   }
-}
-
-vector<int> sozinhos(const vector<int>& vet){
-   vector<int> vetornovo = vet;
-    
-   for (int i = 0; i < vetornovo.size(); i++){
-        if(vetornovo[i]<0)vetornovo[i]=vetornovo[i]*-1;
-   }
-   vector<int> vetoraux = vetornovo;
-
-   for (int i = 0; i < vetornovo.size(); i++){
-      vetoraux[i]=0;
-      for (int j = 0; j < vetoraux.size(); j++){
-         if(vetornovo[i]==vetornovo[j]){
-         vetoraux[i]++;
-         }
-      }
-   }
-   vector<int> vetorfinal;
-    
-   for (int i = 0; i < vetoraux.size(); i++){
-      if(vetoraux[i]==1) vetorfinal.push_back(vetornovo[i]);
-   }
-
-return vetorfinal;   
-}
-
-void ocorrencias(const vector<int>& vet){
-   vector<int> vetornovo = vet;
-    
-   for (int i = 0; i < vetornovo.size(); i++){
-      if(vetornovo[i]<0)vetornovo[i]=vetornovo[i]*-1;
-   }
-   vector<int> vetoraux = vetornovo;
-
-   for (int i = 0; i < vetornovo.size(); i++){
-      vetoraux[i]=0;
-      for (int j = 0; j < vetoraux.size(); j++){
-         if(vetornovo[i]==vetornovo[j]){
-            vetoraux[i]++;
-         }
-      }
-   }
-   vector<int> vetorfinal;
-   int maior = 0;
-   int maiorposicao = 0;
-   for (int i = 0; i < vetoraux.size(); i++){
-      if(maior<vetoraux[i]){
-         maior=vetoraux[i];
-         maiorposicao = i;
-      } 
-   }
-    
-   cout<<vetornovo[maiorposicao];
-
-    
-}
-
-vector<int> recorrentes(const vector<int>& vet){
-   vector<int> vetornovo = vet;
-    
-   for (int i = 0; i < vetornovo.size(); i++){
-      if(vetornovo[i]<0)vetornovo[i]=vetornovo[i]*-1;
-   }
-   vector<int> aux = ordenar(vetornovo);
-   vector<int> vetornovoo = ordenar(vetornovo);
-
-   for (int i = 0; i < vetornovoo.size(); i++){
-      aux[i]=0;
-      for (int j = 0; j < aux.size(); j++){
-         if(vetornovoo[i]==vetornovoo[j]){
-            aux[i]++;
-         }
-      }
-   }
-   vector<int> vetorfinal;
-    
-   for (int i = 0; i < aux.size(); i++){
-      if(aux[i]>1 && vetornovoo[i] != vetornovoo[i+1]) vetorfinal.push_back(vetornovoo[i]);
-   }
-
-return vetorfinal; 
-}
-
-void briga(const vector<int>& vet){
-   vector<int> vetornovo = vet;
-   int total=0;
-   for (int i = 1; i < vetornovo.size(); i++){
-      if(vetornovo[i]>49&&vetornovo[i-1]>29&&vetornovo[i+1]>29) total++;
-   }
-   cout<<"Essa situação ocorreu "<<total<<" vezes";    
-
-}
-
-vector<int> apaziguado(const vector<int>& vet){
-   vector<int> thisvet= vet;
-   vector<int> vetornovo{};
-
-   for (int i = 0; i < thisvet.size(); i++){
-      if(thisvet[i]<0) thisvet[i] =thisvet[i] * -1;
-   }
-    
-   for (int i =0; i < thisvet.size(); i++){
-      if( thisvet[i]>80 &&(thisvet[i-1]<10 || thisvet[i+1]<10))vetornovo.push_back(i);
-   }
-   return vetornovo;
-}
-
-void quantostimes(const vector<int>& vet){
-   vector<int> thisvet= vet;
-   int qntd=0;
-   for (int i = 0; i < thisvet.size(); i++)if((thisvet[i]<0 && thisvet[i+1]>0) || (thisvet[i]>0 && thisvet[i+1]<0))qntd++;
-   cout<<qntd;
-
-}
-
-void timep(const vector<int>& vet){
-   vector<int> thisvet= vet;
-   int quantidade=0;
-   int contador = 0;
-   int contadormaior = 0;
-   int posicao = 0;
-   int posicaofinal = 0;
-   for (int i = 0; i < thisvet.size(); i++){
-      if((thisvet[i]<0 && thisvet[i+1]>0) || (thisvet[i]>0 && thisvet[i+1]<0)){
-         quantidade++;
-         contador = 0;
-      }else{
-         contador++;
-         posicao = i;
-      }
-
-      if(contadormaior < contador){
-         contadormaior = contador;
-         posicaofinal = posicao;
-      }
-
-   }
-   posicaofinal++;
-   contadormaior++;
-   int posfim = posicaofinal - contadormaior+1;
-   for (int i = posicaofinal; i >=posfim; i--){
-      cout<<thisvet[i]<<" ";
-   }
-    
-
-}
-
-void sozinhost(const vector<int>& vet){
-   vector<int> vetornovo = vet;
-   int cont=0;
-   for (int i = 1; i < vetornovo.size(); i++){
-      if((vetornovo[i]>0 && vetornovo[i-1]<0 && vetornovo[i+1]<0) || (vetornovo[i]<0 && vetornovo[i-1]>0 && vetornovo[i+1]>0) ){
-         cont++;
-      }
-	}
-   cout<<"Há "<<cont<<" pessoas sozinhas.";
-}
-
-vector<int> casais(const vector<int>& vet){
-   vector<int> vetornovo = vet;
-   vector<int> casais;
-   int aux = 0;
-   for (int i = 0; i < vetornovo.size(); i++){
-      aux = vetornovo[i] *-1;
-      for (int j = 0; j < vetornovo.size(); j++){
-         if(vetornovo[j] == aux){
-           casais.push_back(vetornovo[i]); 
-         }
-      }
-   }
-    
-   return casais;
-}
-
-vector<int> trios(const vector<int>& vet){
-   vector<int> vetornovo = vet;
-   vector<int> trios;
-
-   for (int i = 0; i <vetornovo.size(); i++){
-      if(vetornovo[i]<0) vetornovo[i] = vetornovo[i] * -1; 
-    }
-
-   int aux=0;
-   for (int i = 0; i < vetornovo.size(); i++){
-      aux = vetornovo[i];
-      int qntd = 0;
-      for (int j = 0; j < vetornovo.size(); j++){
-         if(vetornovo[j] == aux){
-            qntd++; 
-         } 
-      }
-   if(qntd>=3){
-     trios.push_back(vetornovo[i]); 
-   } 
-   }
-    return trios;
-}
-
-vector<int> remove(const vector<int>& vet){
-   vector<int> vetornovo = vet;
-   int aremover=0;
-   cin >> aremover;
-
-   for (int i = 0; i < vetornovo.size(); i++){
-      if(vetornovo[i]==aremover) vetornovo.erase(vetornovo.begin()+i);
-   }
-   return vetornovo;       
-}
-
-vector<int> remove2(const vector<int>& vet, int aremover){
-   vector<int> vetornovo = vet;
-   for (int i = 0; i < vetornovo.size(); i++){
-      if(vetornovo[i]==aremover){        
-          vetornovo.erase(vetornovo.begin()+i);
-      }
-    }
- return vetornovo;       
-}
-
-vector<int> insert(const vector<int>& vet){
-   vector<int> vetornovo = vet;
-   int valor=0;
-   int posicao=0;
-   cout<<"Insira valor e posição";
-   cin >> valor;
-   cin >> posicao;
-
-   vector<int>::iterator it;
-
-   it = vetornovo.begin()+posicao;
-   it = vetornovo.insert (it, valor);
-
-return vetornovo;
-}
-
-vector<int> dance(const vector<int>& vet){
-   vector<int> vetornovo = vet;
-   int bol = 1;
-   for (int i = 0; i < vetornovo.size(); i++){
-      if(vetornovo[i]<0)vetornovo[i] = vetornovo[i]* -1;    
-   }
-   while(bol == 1){
-      bol = 0;
-      for (int i = 0; i < vetornovo.size(); i++){
-         if(vetornovo[i] ==vetornovo[i+1]){
-            vetornovo = remove2(vetornovo,vetornovo[i]);
-            vetornovo = remove2(vetornovo,vetornovo[i+1]);
-            bol = 1;
-         }
-      }
-   }
-   return vetornovo;
-}
-
-// ainda n chamei algumas funções 
 int main(){
     
-   //Busca
+   //Busca                                                           //Output esperado
 
    cout << existe({-9, - 8, 3, 2, -98, 1}, 1) << "\n"; //true
    cout << existe({-9, - 8, 3, 2, -98, 1}, -1) << "\n"; //false
@@ -646,22 +381,5 @@ int main(){
    cout << homens_sao_mais_estressados_que_mulheres({-5, -55, 70, 14}) << "\n"; //true
    cout << homens_sao_mais_estressados_que_mulheres({-55, 10, 14, -20}) << "\n";  //false
 
-   //Parte 3
-
-   vector<int> vetor{60, 3, -4, 9, 12, 33};
-
-   cout << clonar(vetor);
-   cout << pegar_homens(vetor);
-   cout << pegar_calmos(vetor);
-   cout << mulheres_calmas(vetor);
-   cout << inverter_copia(vetor);
-   cout << inverter_inplace(vetor);
-   cout << sortear(vetor);
-   cout << embaralhar(vetor);
-   cout << ordenar(vetor);
-   cout << exclusivos(vetor);
-   cout << diferentes(vetor);
-   cout <<abandonados(vetor);
-
    return 0;
-}
+} 
