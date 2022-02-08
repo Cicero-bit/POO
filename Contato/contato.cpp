@@ -11,19 +11,21 @@ public:
     FONE(std::string chip = "", std::string numero = "") : chip{chip}, numero{numero} {} 
 
     bool isValid(std::string numero){
-        std::string::iterator it1; //it para conseguir percorrer
-        std::string::iterator it2;
+        std::string::iterator i; //it para conseguir percorrer
+        std::string::iterator j;
         std::string temp {"0123456789()."}; //string com numeros para auxificar o numero
         int aux {0};
 
-        for (it1 = numero.begin(); it1 != numero.end(); ++it1){             //loop de auxificação, percorre e verifica se o numero, string, se encaixa na string ferificadora
-            for (it2 = temp.begin(); it2 != temp.end(); ++it2){
-                if (*it1 == *it2) { aux++; }
+        for (i = numero.begin(); i != numero.end(); ++i){             //loop de auxificação, percorre e verifica se o numero, string, se encaixa na string ferificadora
+            for (j = temp.begin(); j != temp.end(); ++j){
+                if (*i == *j){ 
+                    aux++; 
+                }
             }
             if (aux == 0){
                 return false;
             } 
-            aux = 0;
+            aux = 0; //reset
         }
         return true; //true para ok
     }
