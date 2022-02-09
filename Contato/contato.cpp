@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <sstream>
-#include <string>
+#include <string> //to_string
 
 class FONE {
 public:
@@ -59,7 +59,6 @@ class CONTATO {
 public:
     std::string nome;
     std::vector<FONE> contatos;
-    std::string prefixo = "-";
 
     CONTATO(std::string nome = "") : nome{nome} {}
 

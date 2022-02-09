@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <memory>
+#include <memory> //ssharedptr
 #include <string>
 
 class Pessoa{
@@ -19,7 +19,7 @@ public:
     void setNome(std::string nome){
         this -> nome = nome;
     }
-    std::string getNome() {
+    std::string getNome() { //não eh privado, não é necessario
         return nome;
     }
 
@@ -40,9 +40,8 @@ public:
     std::vector<std::shared_ptr<Pessoa>> Cadeiras;         //shared ptr é um ponteiro que meio que se deleta+-, ele tem controle do seu "proprio fechamento"
     int capacidade{0};
 
-    Cinema(int capacidade) : Cadeiras(capacidade, nullptr){                                            //cria locais vazios para existir
-        this->capacidade = capacidade;
-    }
+    Cinema(int capacidade = 0) : Cadeiras{capacidade}{}                                        //cria locais vazios para existir
+
 
 
     int procurarPessoa(std::string nome){
@@ -102,7 +101,6 @@ int main(){
         std::cout << "Digite o comando: ";
         std::string cmd;
         std::cin >> cmd;
-        std::cout << "Output: \n";
 
         if (cmd == "init"){
             int capacidade;
@@ -110,13 +108,12 @@ int main(){
             cinema = Cinema(capacidade);
         }
         else if (cmd == "add"){
-            std::string nome {};
-            std::string telefone;
+            std::string nome, telefone;
             int indice;
             std::cin >> nome >> telefone >> indice;
             cinema.adicionarPessoa(std::make_shared<Pessoa>(nome, telefone), indice);
         }
-        else if (cmd == "remover"){
+        else if (cmd == "rm"){
             std::string nome {};
             std::cin >> nome;
             cinema.removerPessoa(nome);
