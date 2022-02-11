@@ -1,4 +1,3 @@
-//jogo da digitação
 #include <SFML/Graphics.hpp>
 #include <functional>
 #include <iostream>

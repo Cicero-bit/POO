@@ -29,7 +29,7 @@ class Pessoa{
         std::string toString(){
             std::stringstream ss;
             ss << " "<< this->id << ":" << this->phone << " ";
-            return ss.str();
+            return ss.str(); //str retorna um obejeto string copiado da stream, ss ^^(get/set)
         }
 };
 
@@ -51,9 +51,9 @@ class Cinema{
         }
 
         void remover(std::string id){
-            for(auto it = cadeiras.begin(); it != cadeiras.end(); it++){
-                if(it->second.getId() == id){
-                    cadeiras.erase(it);
+            for(auto it = cadeiras.begin(); it != cadeiras.end(); it++){ //vasculha
+                if(it->second.getId() == id){ //verficação com a entrada
+                    cadeiras.erase(it); //remove com erase na pos
                     return;
                 }
             }

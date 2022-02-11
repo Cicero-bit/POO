@@ -3,22 +3,42 @@
 
 class Fone{
 private:
-    std::string id;
-    std::string numero;
+    std::string nome;
+    std::string telefone;
 
 public:
 
-    Fone(std::string id, std::string numero) : id{id}, numero{numero}{}
+    Fone(std::string nome, std::string telefone) : nome{nome}, telefone{telefone}{}
 
-    bool valid(std::string numero){
+    std::string getNome(){ //para conseguir usar fora da classe, ja que é private
+        return this->nome;
+    }
+
+    void setNome(std::string nome){  //para conseguir setar algo a variavel
+        this->nome = nome;
+    }
+
+    std::string gettelefone(){
+        return this->telefone;
+    }
+
+    void settelefone(std::string telefone){
+        this->telefone = telefone;
+    }
+
+    std::string toString(){ 
+        return this->nome + " " + this->telefone;
+    }
+    
+    bool isvalid(std::string telefone){
         std::string::iterator i; //iterator para conseguir percorrer e receber a posição, o andador
         std::string::iterator j;
         std::string ver {"0123456789()."}; 
         int aux {0};
 
-        for (i = numero.begin(); i != numero.end(); ++i){             //loop de auteificação, percorre e verifica se o numero, string, se encaixa na string ferificadora
-            for (j = ver.begin(); j != ver.end(); ++j){ //
-                if (*i == *j){ //se a posição
+        for (i = telefone.begin(); i != telefone.end(); ++i){   //loop de autenticação, percorre e verifica se o telefone, string, se encaixa na string verificadora
+            for (j = ver.begin(); j != ver.end(); ++j){ //verfica com os numero do ver,char validos, caso sejam compativeis, passa com a ver do aux
+                if (*i == *j){ //valor pos
                     aux++; 
                 }
             }
@@ -27,58 +47,38 @@ public:
             } 
             aux = 0; //reset
         }
-        return true; //true para ok
-    }
-
-    std::string getId(){ //para conseguir usar fora da classe, ja que é private
-        return this->id;
-    }
-
-    void setId(std::string id){  //para conseguir setar algo a variavel
-        this->id = id;
-    }
-
-    std::string getNumero(){
-        return this->numero;
-    }
-
-    void setNumero(std::string numero){
-        this->numero = numero;
-    }
-
-    std::string toString(){ 
-        return this->id + " " + this->numero;
+        return true; 
     }
 };
 
 class Contato{
 private:
-    std::vector<Fone> fones;
+    std::vector<Fone> Telefone;
     std::string nome;
 
 public:
 
-    Contato(std::vector<Fone> fones, std::string nome) : fones{fones}, nome{nome}  {}
+    Contato(std::vector<Fone> Telefone, std::string nome) : Telefone{Telefone}, nome{nome}  {}
 
     void addFone(Fone fone){ 
-        this->fones.push_back(fone);
+        this->Telefone.push_back(fone);
     }
 
     void rmFone(int index){ 
-        if(index < this->fones.size()){
-            this->fones.erase(this->fones.begin() + index); 
+        if(index < this->Telefone.size()){
+            this->Telefone.erase(this->Telefone.begin() + index); 
             std::cout << "removido \n";
         } else{
             std::cout << "telefone inexistente" << std::endl;
         }
     }
 
-    std::vector<Fone> getFones(){
-        return this->fones;
+    std::vector<Fone> getTelefone(){
+        return this->Telefone;
     }
     
-    void setFones(std::vector<Fone> fones){
-        this->fones = fones;
+    void setTelefone(std::vector<Fone> Telefone){
+        this->Telefone = Telefone;
     }
     std::string getNome(){
         return this->nome;
@@ -90,8 +90,8 @@ public:
 
     std::string toString(){
         std::string str = this->nome + " "; //inicia sttr
-        for (int i = 0; i < this->fones.size(); i++){
-            str += this->fones[i].toString() + " "; //add tudo a strign
+        for (int i = 0; i < this->Telefone.size(); i++){
+            str += this->Telefone[i].toString() + " "; //add tudo a strign
         }
         return str; //retorn ela
     }
@@ -163,9 +163,9 @@ int main() {
     Contato contato1 = Contato(std::vector<Fone>(), "Jao");
     contato1.addFone(Fone("4", "12345678"));
     contato1.addFone(Fone("5", "996030087"));
-    contato1.rmFone(1); //sinal de vida, fone removido
-    contato1.rmFone(2); //telefone n existe, não roda remoção
-    agenda.addContato(contato1);
+    contato1.rmFone(1); //fone removido,vida
+    contato1.rmFone(2); //telefone n existe
+    agenda.addContato(contato1); //add
     agenda.rmContato("Jao");  //removido
     
     return 0;
