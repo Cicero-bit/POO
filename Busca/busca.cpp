@@ -65,10 +65,10 @@ public:
     }
 
     void rmFone(int index){ 
-        if(index < this->Telefone.size()){
+        if(index < this->Telefone.size()){ //pega o telfone, linkado ao index e apaga
             this->Telefone.erase(this->Telefone.begin() + index); 
             std::cout << "removido \n";
-        } else{
+        }else{
             std::cout << "telefone inexistente" << std::endl;
         }
     }

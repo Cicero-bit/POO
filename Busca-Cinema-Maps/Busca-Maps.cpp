@@ -32,22 +32,23 @@ class Fone{
             }
             return true; //true para ok
         }    
-        std::string getNome(){
-            return this->nome;
-        }
 
         void setNome(std::string nome){
             this->nome = nome;
         }
-       
-        std::string gettelefone(){
-            return this->telefone;
+
+        std::string getNome(){
+            return this->nome;
         }
 
         void settelefone(std::string telefone){
             if(isvalid(telefone)){
                 this->telefone = telefone;
             }
+        }
+
+        std::string gettelefone(){
+            return this->telefone;
         }
 };
 
@@ -75,12 +76,12 @@ class Contato{
             this->fones.erase(this->fones.begin()+index);
         }
 
-        void setNome(std::string nome){
-            this->nome = nome;
-        }
-
         std::string getNome(){
             return this->nome;
+        }
+
+        void setNome(std::string nome){
+            this->nome = nome;
         }
 
         std::string getFones(){
@@ -94,7 +95,7 @@ class Contato{
         std::string toString(){
             std::stringstream ss;
             for(int i=0; i<(int)fones.size(); i++){
-                ss << i << " - " << "[ " << fones[i].getNome() << " : " << fones[i].gettelefone() << " ]" << std::endl;
+                ss << i << " [ " << fones[i].getNome() << " : " << fones[i].gettelefone() << " ]" << std::endl;
             }
             return ss.str();
         }
@@ -136,13 +137,9 @@ class Agenda{
             return contatos.begin()->second;
         }
 
-        int getsize(){
-            return this->contatos.size();
-        }
-        
         std::string toString(){
             std::stringstream ss;
-            ss << "Agenda: " << std::endl;
+            ss << "Contatos: " << std::endl;
             for(auto it = contatos.begin(); it != contatos.end(); it++){
                 ss << it->second->toString() << std::endl;
             }
@@ -158,16 +155,14 @@ int main(){
     Contato* contatoatual = nullptr;
     Agenda agenda;
     Fone fone;
-    bool vazio = true;
     
     while(true){
-        std::string line;
+        std::string line, cmd;
         std::getline(std::cin, line);
         std::stringstream ss(line);
-        std::string cmd;
         ss >> cmd;
 
-        if(cmd == "add"){
+        if(cmd == "init"){
             std::string nome, id, telefone;
             ss >> nome >> telefone >> id;
             Contato* aux = new Contato(nome);
@@ -180,50 +175,27 @@ int main(){
                 fone = Fone(telefone, id);
                 if(contatoatual->addFone(fone)){
                     std::cout << "Adicionado" << std::endl;
-                    vazio = false;
                 }else{
                     std::cout << "Contato ja existe" << std::endl;
                 }
                 std::cout << contatoatual->toString() << std::endl;
             }else{
-                std::cout << "Fone invalido" << std::endl;
+                std::cout << "Numero invalido" << std::endl;
             }
 
         }
-        else if(cmd == "rm" && vazio == false){
-            std::string nome;
-            Contato* aux;
-            int index;
-            ss >> nome >> index;
-            aux = agenda.getContato(nome);
-            if(aux != nullptr){
-                contatoatual = aux;
-                contatoatual->rmFone(index);
-                std::cout << contatoatual->toString() << std::endl;
-            }else{
-                std::cout << "Contato nao encontrado" << std::endl;
-            }
-
-        }
-        else if(cmd == "deletar" && vazio == false){
+        else if(cmd == "rm"){
             std::string nome;
             ss >> nome;
             if(agenda.rmContato(nome)){
-                std::cout << "Contato deletado com sucesso" << std::endl;
+                std::cout << "Contato deletado" << std::endl;
                 contatoatual = agenda.getFirstContato(nome);
             
             }else{
-                std::cout << "Contato nao encontrado" << std::endl;
-            }
-
-            if(agenda.getsize()== 0){
-                contatoatual = nullptr;
-                std::cout << "Agenda vazia" << std::endl;
-            }            
-
-        
+                std::cout << "Contato inexistente" << std::endl;
+            }    
         }
-        else if(cmd == "search" && vazio == false){
+        else if(cmd == "search"){
             std::string nome;
             ss >> nome;
             agenda.searchContato(nome);
