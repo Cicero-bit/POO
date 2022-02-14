@@ -20,7 +20,7 @@ public:
     }
     void morrer(){
         vivo = false;
-        std::cout << "Personagem morto" <<  std::endl;
+        std::cout << "Personagem morreu ;(" <<  std::endl;
     }
     void ReceberDano(int dano){
         if(vivo = true && vida > dano){

@@ -54,7 +54,7 @@ class Fone{
 
 class Contato{
     private:
-        std::string prefix="->";
+        std::string texto_aux = "->";
         std::string nome;
     public:
         std::vector<Fone> fones;
@@ -86,16 +86,16 @@ class Contato{
 
         std::string getFones(){
             std::stringstream ss;
-            for(int i=0; i<(int)fones.size(); i++){
-                ss << this->prefix << this->fones[i].gettelefone() << std::endl;
+            for(int i = 0; i < (int)fones.size(); i++){
+                ss << this->texto_aux << this->fones[i].gettelefone() << std::endl;
             }
             return ss.str();
         }
         
         std::string toString(){
             std::stringstream ss;
-            for(int i=0; i<(int)fones.size(); i++){
-                ss << i << " [ " << fones[i].getNome() << " : " << fones[i].gettelefone() << " ]" << std::endl;
+            for(int i = 0; i < (int)fones.size(); i++){
+                ss << "Contato " << i << " = " << this->nome << " [ " << fones[i].gettelefone() << " : " << fones[i].getNome() << " ]" << std::endl;
             }
             return ss.str();
         }
