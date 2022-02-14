@@ -2,12 +2,14 @@
 #include <vector>
 
 class Personagem{
-private:    
-    bool vivo = true;
-    std::string nome{""};
-    int vida = 0;
+
+    bool alive = true;
+    std::string nome;
+    int vida = 100, ataque = 10, speeldmg = 10, mana = 10, stamina = 10;
 public:
-    Personagem(std::string nome = "") : nome{nome}{}
+    Personagem(){
+        std::cout << "BOOMM MAGIA";
+    }
 
     std::string getNome(){
         return nome;
@@ -18,60 +20,78 @@ public:
     int getVida(){
         return vida;
     }
+    int getMana(){
+        return mana;
+    }
+    bool status(){
+        return alive;
+    }
     void morrer(){
-        vivo = false;
+        alive = false;
         std::cout << "Personagem morreu ;(" <<  std::endl;
     }
     void ReceberDano(int dano){
-        if(vivo = true && vida > dano){
+        if(alive = true && vida > dano){
             vida -= dano;
         }else{
+            std::cout << "Dano d+ ";
             morrer();
+            vida = 0;
         }
     }
 };
 class Warrior: public Personagem{
-private:
-    int vida = 300, ataque = 10, speeldmg = 5, mana = 10, stamina = 150;
-
+    std::string nome;
+    int vida = 100, ataque = 10, speeldmg = 5, mana = 10, stamina = 150;
 public:
-    Warrior(std::string nome = "") : Personagem{nome}{
-        std::cout << nome << " vida: " << vida << std::endl;
-    }
-    void lancarSpell(Personagem* inimigo){
-        inimigo->ReceberDano(speeldmg);
-        this->mana -= 25;
+    Warrior(std::string nome = "") : nome{nome}{
+        std::cout << nome << " -> Class Warrior / VIDA: " << vida << std::endl;
     }
     void atacar(Personagem* inimigo){
-        inimigo->ReceberDano(ataque);
+        if (stamina >= ataque){
+            inimigo->ReceberDano(ataque);
+            stamina -= ataque;
+        }
+    }
+    void regenerar(){
+        if(stamina > 10){
+            vida += (stamina/2);
+            stamina/2;
+        }
     }
 };
 
 class Mage: public Personagem{
-private:
+    std::string nome;
     int vida = 100, ataque = 5, speeldmg = 30, mana = 100, stamina = 50;
-
 public:
-    Mage(std::string nome = ""): Personagem{nome}{
-        std::cout << nome << " vida: " << vida << std::endl;
+    Mage(std::string nome = ""): nome{nome}{
+        std::cout << nome << " -> Class Mage / VIDA: " << vida << std::endl;
     }
     void lancarSpell(Personagem* inimigo){
-        inimigo->ReceberDano(speeldmg);
-        this->mana -= 25;
+        if(mana >= speeldmg){
+            inimigo->ReceberDano(speeldmg);
+            mana -= speeldmg;
+        }
     }
-    void atacar(Personagem* inimigo){
-        inimigo->ReceberDano(ataque);
+    void manaregen(){
+        if (mana < 10){
+            stamina -= 10;
+            mana = 100;
+        }
     }
 };
 
 int main(){
   
-    Mage Jao = Mage{"Jao"};
-    Warrior Ze = Warrior{"Ze"};
+    Mage Jao{"Jao"};
+    Warrior Ze{"Ze"};
 
     Ze.atacar(&Jao);
+    Jao.lancarSpell(&Ze);
 
-    std::cout<< Jao.getVida() << std::endl;
+    std::cout << Jao.getVida() << std::endl;
+    std::cout << Ze.getVida() << std::endl;
 
     return 0;
-} //este cod não está pronto ainda
+} 
