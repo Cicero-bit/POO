@@ -109,7 +109,7 @@ public:
     }
 
     friend std::ostream& operator<<(std::ostream& os, const Client& client){
-        os << "- " << client.clientId << " [";
+        os << client.clientId << " [";
 
         for (int i = 0; i < (int) client.accounts.size(); i++){
             if (i > 0){
@@ -212,35 +212,30 @@ public:
 int main(){
     Bank Bank;
     while(true){
-        std::string line;
+        std::string line, cmd;
         std::getline(std::cin, line);
         std::stringstream ss(line);
-        std::string cmd;
         ss >> cmd;
     
         try{
             if(cmd == "add"){
                 std::string clientName{""};
                 ss >> clientName;
-
                 Bank.addClient(clientName);
             }else if(cmd == "wid"){
                 int accountId;
                 float value;
                 ss >> accountId >> value;
-        
                 Bank.withdraw(accountId, value);
             }else if(cmd == "depo"){
                 int accountId;
                 float value;
                 ss >> accountId >> value;
-        
                 Bank.deposit(accountId, value);
             }else if(cmd == "trf"){
                 int accountIdFrom, accountIdTo;
                 float value;
                 ss >> accountIdFrom >> accountIdTo >> value;
-        
                 Bank.transfer(accountIdFrom, accountIdTo, value);
             }else if(cmd == "att"){
                 Bank.monthlyUpdate();
