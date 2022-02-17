@@ -7,14 +7,12 @@
 class Fone{
     private:
         std::string telefone;
-        std::string nome;
+        std::string id;
     public:
-        Fone(std::string telefone ="", std::string nome="") : nome{nome}, telefone{telefone}{
-            this->telefone = telefone;
-            this->nome = nome;
-        }
+        Fone(std::string telefone ="", std::string id="") : id{id}, telefone{telefone}{}
+
         bool isvalid(std::string telefone){
-            std::string::iterator i; //iterator para conseguir percorrer e receber a posição, o andador
+            std::string::iterator i; //iterator para conseguir percorrer e receber a posição, o andador, mais facil
             std::string::iterator j;
             std::string ver {"0123456789()."}; 
             int aux {0};
@@ -33,12 +31,12 @@ class Fone{
             return true; //true para ok
         }    
 
-        void setNome(std::string nome){
-            this->nome = nome;
+        void setId(std::string id){
+            this->id = id;
         }
 
-        std::string getNome(){
-            return this->nome;
+        std::string getId(){
+            return this->id;
         }
 
         void settelefone(std::string telefone){
@@ -57,23 +55,23 @@ class Contato{
         std::string texto_aux = "->";
         std::string nome;
     public:
-        std::vector<Fone> fones;
+        std::vector<Fone> telefones;
         
         Contato(std::string nome=""){
             this->nome = nome;
         }
-        bool addFone(Fone fone){
-            for(Fone &f : fones){
-                if(f.gettelefone() == fone.gettelefone()){
+        bool addFone(Fone auxfone){
+            for(Fone &f : telefones){
+                if(f.gettelefone() == auxfone.gettelefone()){
                     return false;
                 }
             }
-            this->fones.push_back(fone);
+            this->telefones.push_back(auxfone);
             return true;
         }
       
         void rmFone(int index){
-            this->fones.erase(this->fones.begin()+index);
+            this->telefones.erase(this->telefones.begin()+index);
         }
 
         std::string getNome(){
@@ -84,18 +82,18 @@ class Contato{
             this->nome = nome;
         }
 
-        std::string getFones(){
+        std::string getteleFones(){
             std::stringstream ss;
-            for(int i = 0; i < (int)fones.size(); i++){
-                ss << this->texto_aux << this->fones[i].gettelefone() << std::endl;
+            for(int i = 0; i < (int)telefones.size(); i++){
+                ss << this->texto_aux << this->telefones[i].gettelefone() << std::endl;
             }
             return ss.str();
         }
         
         std::string toString(){
             std::stringstream ss;
-            for(int i = 0; i < (int)fones.size(); i++){
-                ss << "Contato " << i << " = " << this->nome << " [ " << fones[i].gettelefone() << " : " << fones[i].getNome() << " ]" << std::endl;
+            for(int i = 0; i < (int)telefones.size(); i++){
+                ss << this->nome << " [ " << telefones[i].gettelefone() << " : " << telefones[i].getId() << " ]" << std::endl;
             }
             return ss.str();
         }
@@ -122,7 +120,7 @@ class Agenda{
         void searchContato(std::string nome){
             bool encontrado = false;
             for(auto& c : this->contatos){
-                if(c.first.find(nome) != std::string::npos || c.second->getFones().find(nome) != std::string::npos){
+                if(c.first.find(nome) != std::string::npos || c.second->getteleFones().find(nome) != std::string::npos){
                     std::cout << c.second->toString() << std::endl;
                     encontrado = true;
                 }
@@ -174,7 +172,7 @@ int main(){
                 }
                 fone = Fone(telefone, id);
                 if(contatoatual->addFone(fone)){
-                    std::cout << "Adicionado" << std::endl;
+                    std::cout << "Iniciada" << std::endl;
                 }else{
                     std::cout << "Contato ja existe" << std::endl;
                 }
