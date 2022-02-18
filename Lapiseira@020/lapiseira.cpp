@@ -7,17 +7,6 @@ struct Grafite{
     std::string dureza;
     int tamanho;
 
-    Grafite(float calibre = 0, std::string dureza = "", int tamanho = 0){
-        this->calibre = calibre;
-        this->dureza = dureza;
-        this->tamanho = tamanho;
-    }
-
-    friend std::ostream &operator<<(std::ostream &os, const Grafite &lapiseira){  //sobrecarga de operator, não entendi direto ainda(ver)
-        os << "Grafite: [" << lapiseira.calibre << ":" << lapiseira.dureza << ":" << lapiseira.tamanho << "]\n";
-        return os;
-    }
-
     int Desgaste(){
         if (this->dureza == "HB"){
             return 1;
@@ -32,6 +21,17 @@ struct Grafite{
             return 6;
         }
     }
+    friend std::ostream &operator<<(std::ostream &os, const Grafite &lapiseira){  //sobrecarga de operator, não entendi direto ainda(ver)
+        os << "Grafite: [" << lapiseira.calibre << ":" << lapiseira.dureza << ":" << lapiseira.tamanho << "]\n";
+        return os;
+    }
+    
+    Grafite(float calibre = 0, std::string dureza = "", int tamanho = 0){
+        this->calibre = calibre;
+        this->dureza = dureza;
+        this->tamanho = tamanho;
+    }
+
 };
 
 struct Lapiseira{

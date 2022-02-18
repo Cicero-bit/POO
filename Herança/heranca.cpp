@@ -109,6 +109,7 @@ int main(){
 
     Ze.atacar(&Jao);
     Jao.lancarSpell(&Ze);
+    Ze.regenerar();
 
     std::cout << "Vida Jao depois do ataque: " << Jao.getVida() << std::endl;
     std::cout << "Vida Ze depois do ataque: " << Ze.getVida() << std::endl;

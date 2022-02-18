@@ -82,7 +82,6 @@ int main(){
     
 
     while (true){
-        std::cout << "Digite o comando: ";
         std::string line;
         std::getline(std::cin, line);
         std::stringstream ss(line);
