@@ -141,15 +141,15 @@ int main(){
     std::shared_ptr<Trampolim> tramoplin (new Trampolim ());
 
     while (true){
-        std::string comando{""};
+        std::string cmd{""};
         std::string linha{""};
 
-        std::cin >> comando;
+        std::cin >> cmd;
         getline(std::cin, linha);
 
         std::stringstream ss(linha);
 
-        if (comando == "new"){
+        if (cmd == "new"){
             std::string nome;
             int idade;
             ss >> nome >> idade;
@@ -157,24 +157,24 @@ int main(){
 
             tramoplin->arrive(temp);
         }
-        else if (comando == "join"){
+        else if (cmd == "join"){
             tramoplin->join();
         }
-        else if(comando == "out"){
+        else if(cmd == "out"){
             tramoplin->out();
         }
-        else if(comando == "show"){
+        else if(cmd == "show"){
             std::cout << tramoplin->toString();
         } 
-        else if (comando == "remove"){
+        else if (cmd == "rm"){
             std::string nome;
             ss >> nome;
             tramoplin->remove(nome);
         }
-        else if (comando == "clear"){
+        else if (cmd == "clear"){
             tramoplin->clear();
         }
-        else if (comando == "end"){
+        else if (cmd == "end"){
             break;
         }
         else 

@@ -338,48 +338,67 @@ vector<int> ordenar(const vector<int>& vet){
 }
 
 int main(){
-    
-   //Busca                                                           //Output esperado
+                                                         
+   cout << existe({-9, - 8, 3, 2, -98, 1}, 1) << "\n"; 
+   cout << existe({-9, - 8, 3, 2, -98, 1}, -1) << "\n"; 
 
-   cout << existe({-9, - 8, 3, 2, -98, 1}, 1) << "\n"; //true
-   cout << existe({-9, - 8, 3, 2, -98, 1}, -1) << "\n"; //false
+   cout << contar({1, 2, -98, 4, 5, 9, 12, 2, -3, 2}, 2) << "\n"; 
+   cout << contar({1, 2, -98, 4, 5, 9, 12, 2, -3}, 3) << "\n"; 
 
-   cout << contar({1, 2, -98, 4, 5, 9, 12, 2, -3, 2}, 2) << "\n"; //3
-   cout << contar({1, 2, -98, 4, 5, 9, 12, 2, -3}, 3) << "\n"; //0
+   cout << procurar_valor({1, 3, 45, -9, -12, -99, 2, -99}, -99) << "\n"; 
+   cout << procurar_valor({1, 3, 45, -9, -12, -99, 2, -99}, -2) << "\n"; 
 
-   cout << procurar_valor({1, 3, 45, -9, -12, -99, 2, -99}, -99) << "\n"; //5
-   cout << procurar_valor({1, 3, 45, -9, -12, -99, 2, -99}, -2) << "\n"; //-1
-
-   cout << procura_valor_apartir({1, 3, 45, -9, -12, -99, 2, -99}, -99, 6) << "\n"; //7
-   cout << procura_valor_apartir({1, 3, 45, -9, -12, -99, 2, -99}, 2, 5) << "\n"; //6
+   cout << procura_valor_apartir({1, 3, 45, -9, -12, -99, 2, -99}, -99, 6) << "\n"; 
+   cout << procura_valor_apartir({1, 3, 45, -9, -12, -99, 2, -99}, 2, 5) << "\n"; 
 
 
-   //Melhor Caso
+   cout << procurar_menor({1, -55, 12, 99, 87, -2, 7}) << "\n"; 
 
-   cout << procurar_menor({1, -55, 12, 99, 87, -2, 7}) << "\n"; //-55
+   cout << procurar_maior({1, -55, 12, 99, 87, -2, 7}) << "\n"; 
 
-   cout << procurar_maior({1, -55, 12, 99, 87, -2, 7}) << "\n"; //99
+   cout << procurar_menor_pos({1, -55, 12, 99, 87, -2, 7}) << "\n";
 
-   cout << procurar_menor_pos({1, -55, 12, 99, 87, -2, 7}) << "\n"; //1
+   cout << procurar_menor_pos_apartir({1, -55, 12, 99, 87, -2, 7}, 3) << "\n";
 
-   cout << procurar_menor_pos_apartir({1, -55, 12, 99, 87, -2, 7}, 3) << "\n"; //5
+   cout << procurar_melhor_pos_se({5, -55, 12, 99, 87, 2, 7}) << "\n";
 
-   cout << procurar_melhor_pos_se({5, -55, 12, 99, 87, 2, 7}) << "\n"; //5
 
-   //Contagem 
+   cout << calcular_stress_medio({5, -55, 10, 14, -20}) << "\n"; 
 
-   cout << calcular_stress_medio({5, -55, 10, 14, -20}) << "\n"; //20.8
+   cout << mais_homens_ou_mulheres({5, -55, 10, 14, -20}) << "\n";
+   cout << mais_homens_ou_mulheres({-55, 10, 14, -20}) << "\n"; 
+   cout << mais_homens_ou_mulheres({5, -55, -10, 14, -20}) << "\n"; 
 
-   cout << mais_homens_ou_mulheres({5, -55, 10, 14, -20}) << "\n"; //homens
-   cout << mais_homens_ou_mulheres({-55, 10, 14, -20}) << "\n"; //empate
-   cout << mais_homens_ou_mulheres({5, -55, -10, 14, -20}) << "\n"; //mulheres
+   cout << qual_metade_eh_mais_estressada({60, 3, -4, 9, 12, 33}) << "\n"; 
+   cout << qual_metade_eh_mais_estressada({66, 1, 2, 99, 5, 2}) << "\n"; 
+   cout << qual_metade_eh_mais_estressada({60, 2, 3, 5, 59, 1}) << "\n";
 
-   cout << qual_metade_eh_mais_estressada({60, 3, -4, 9, 12, 33}) << "\n"; //primeira
-   cout << qual_metade_eh_mais_estressada({66, 1, 2, 99, 5, 2}) << "\n"; //segunda
-   cout << qual_metade_eh_mais_estressada({60, 2, 3, 5, 59, 1}) << "\n"; //empate
-
-   cout << homens_sao_mais_estressados_que_mulheres({-5, -55, 70, 14}) << "\n"; //true
-   cout << homens_sao_mais_estressados_que_mulheres({-55, 10, 14, -20}) << "\n";  //false
+   cout << homens_sao_mais_estressados_que_mulheres({-5, -55, 70, 14}) << "\n";
+   cout << homens_sao_mais_estressados_que_mulheres({-55, 10, 14, -20}) << "\n"; 
 
    return 0;
 } 
+
+//true
+//false
+//3
+//0
+//5
+//5
+//-1
+//7
+//6
+//-55
+//99
+//1
+//5
+//5
+//20.8
+//homens
+//empate
+//mulheres
+//primeira
+//segunda
+//empate
+//true
+//false

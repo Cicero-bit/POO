@@ -159,10 +159,10 @@ public:
 
 int main() {
     Agenda agenda = Agenda();
-
     Contato contato1 = Contato(std::vector<Fone>(), "Jao");
-    contato1.addFone(Fone("4", "12345678"));
-    contato1.addFone(Fone("5", "996030087"));
+
+    contato1.addFone(Fone("Tim", "12345678"));
+    contato1.addFone(Fone("Oi", "996030087"));
     contato1.rmFone(1); //fone removido,vida
     contato1.rmFone(2); //telefone n existe
     agenda.addContato(contato1); //add

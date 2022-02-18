@@ -73,27 +73,25 @@ struct Motoca{
 
 
 int main(){
-    Pessoa pessoa(); //nome "" e idade 0 de padrão
-    
+    Pessoa pessoa(); 
     Motoca motoca1;
 
     while(true){
-        std::string linha;
+        std::string linha, cmd;
         std::getline(std::cin, linha);
-        std::stringstream ss(linha);
-        std::string cmd;
+        std::stringstream ss(linha);   
         int tempo;
         ss >> cmd;
-        if (cmd == "Entrar"){
+        if (cmd == "init"){
             int potencia = 0;
             ss >> potencia;
             motoca1 = Motoca();
             motoca1.potencia = potencia;
         }
-        else if(cmd == "Status"){
+        else if(cmd == "status"){
             std::cout << motoca1 << "\n";
         }
-        else if(cmd == "Montar") {
+        else if(cmd == "montar") {
             std::string nome{};
             int idade = 0;
             ss >> nome >> idade;
@@ -102,7 +100,7 @@ int main(){
                 delete pessoa;
             }
         }
-        else if(cmd == "Sair") {
+        else if(cmd == "sair") {
             Pessoa *pessoa = motoca1.removerpessoa();
             if(pessoa != nullptr){
                 delete pessoa; //apaga a pessoa da memoria heap

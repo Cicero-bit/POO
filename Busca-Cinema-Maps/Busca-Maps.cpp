@@ -131,7 +131,7 @@ class Agenda{
 
         }
         
-        Contato* getFirstContato(std::string nome){
+        Contato* BeginContato(std::string nome){
             return contatos.begin()->second;
         }
 
@@ -172,14 +172,14 @@ int main(){
                 }
                 fone = Fone(telefone, id);
                 if(contatoatual->addFone(fone)){
-                    std::cout << "Iniciada" << std::endl;
+                    std::cout << "Agenda:" << std::endl;
                 }else{
                     std::cout << "Contato ja existe" << std::endl;
                 }
                 std::cout << contatoatual->toString() << std::endl;
-            }else{
+                }else{
                 std::cout << "Numero invalido" << std::endl;
-            }
+                }
 
         }
         else if(cmd == "rm"){
@@ -187,7 +187,7 @@ int main(){
             ss >> nome;
             if(agenda.rmContato(nome)){
                 std::cout << "Contato deletado" << std::endl;
-                contatoatual = agenda.getFirstContato(nome);
+                contatoatual = agenda.BeginContato(nome);
             
             }else{
                 std::cout << "Contato inexistente" << std::endl;
